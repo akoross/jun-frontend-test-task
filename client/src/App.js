@@ -7,6 +7,11 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <div className="container pt-5 pb-5">
+          <div className="row">
+            <RiteHorses />
+          </div>
+        </div>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -19,11 +24,6 @@ function App() {
           Learn React.
         </a>
       </header>
-      <div className="container pt-5 pb-5">
-        <div className="row">
-          <RiteHorses />
-        </div>
-      </div>
     </div>
   );
 }

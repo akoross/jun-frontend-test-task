@@ -3,9 +3,10 @@ const express = require('express');
 const http = require('http');
 const io = require('socket.io');
 const cors = require('cors');
+require('dotenv').config();
 
 const INTERVAL = 1000;
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
 
 const horses = [
   {
@@ -50,7 +51,7 @@ function getRound(socket) {
       name: horse.name,
       distance: maxDistance < currentDistance ? maxDistance : currentDistance
     }
-    
+
   });
 
   socket.emit('ticker', round);
