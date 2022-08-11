@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import RiteHorses from "./components/RiteHorses";
+import store from './redux/store'
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <div className="container pt-5 pb-5">
           <div className="row">
-            <RiteHorses />
+            <RiteHorses store={store}/>
           </div>
         </div>
         <p>

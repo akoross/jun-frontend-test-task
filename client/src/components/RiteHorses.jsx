@@ -1,19 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import io from "socket.io-client";
 import Horse from "./Horse";
+
+import { connect } from "react-redux";
 
 const server = "http://localhost:3002";
 const socket = io.connect(server);
 
-export default function RiteHorses() {
-  const [horses, setHorses] = useState([]);
-
+function RiteHorses(props) {
+  const {horses, updateDistance} = props
   useEffect(() => {
     socket.emit("start");
-    socket.on("ticker", (data) => {
-      setHorses(data);
+    socket.on("ticker", (horses) => {
+      updateDistance(horses);
     });
-    return () => {socket.off("ticker");}
+    return () => {
+      socket.off("ticker");
+    };
   }, []);
 
   return (
@@ -24,3 +27,22 @@ export default function RiteHorses() {
     </ul>
   );
 }
+
+const mapStateToProps = (state) => {
+  // console.log(state);
+
+  return {
+    horses: state.horses,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateDistance: (horses) => {
+      const action = { type: "UPDATE", horses };
+      dispatch(action);
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RiteHorses);
