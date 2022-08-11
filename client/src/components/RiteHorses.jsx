@@ -13,6 +13,7 @@ export default function RiteHorses() {
     socket.on("ticker", (data) => {
       setHorses(data);
     });
+    return () => {socket.off("ticker");}
   }, []);
 
   return (
